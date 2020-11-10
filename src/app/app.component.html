@@ -1,0 +1,875 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #dfc800;
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  svg.material-icons {
+    height: 24px;
+    width: auto;
+  }
+
+  svg.material-icons:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  .card svg.material-icons path {
+    fill: #888;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .card {
+    border-radius: 4px;
+    border: 1px solid #e9ff1e;
+    background-color: #fafafa;
+    height: 50px;
+    width: 290px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+  }
+
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .card.card-small {
+    height: 56px;
+    width: 168px;
+    position: absolute;
+
+  }
+
+  .card-container .card:not(.highlight-card) {
+    cursor: pointer;
+  }
+
+  .card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+    background-color: #e9ff1e;
+  }
+
+  .card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+  }
+
+  .card.highlight-card {
+    background-color: #272575;
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+  }
+
+  .card.card.highlight-card span {
+    margin-left: 60px;
+  }
+
+  svg#rocket {
+    width: 80px;
+    position: absolute;
+    left: -10px;
+    top: -24px;
+  }
+
+  svg#rocket-smoke {
+    height: calc(100vh - 95px);
+    position: absolute;
+    top: 10px;
+    right: 180px;
+    z-index: -10;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+
+  .terminal {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 6px;
+    padding-top: 45px;
+    margin-top: 8px;
+    overflow: hidden;
+    background-color: rgb(15, 15, 16);
+  }
+
+  .terminal::before {
+    content: "\2022 \2022 \2022";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: rgb(58, 58, 58);
+    color: #c2c3c4;
+    width: 100%;
+    font-size: 2rem;
+    line-height: 0;
+    padding: 14px 0;
+    text-indent: 4px;
+  }
+
+  .terminal pre {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    color: white;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+
+  .circle-link {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    margin: 8px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: 1s ease-out;
+  }
+
+  .circle-link:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+  }
+
+  footer a {
+    display: flex;
+    align-items: center;
+  }
+
+  .github-star-badge {
+    color: #24292e;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 3px 10px;
+    border: 1px solid rgba(27,31,35,.2);
+    border-radius: 3px;
+    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+    margin-left: 4px;
+    font-weight: 600;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  }
+
+  .github-star-badge:hover {
+    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
+    border-color: rgba(27,31,35,.35);
+    background-position: -.5em;
+  }
+
+  .github-star-badge .material-icons {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+  }
+
+  svg#clouds {
+    position: fixed;
+    bottom: -160px;
+    left: -230px;
+    z-index: -10;
+    width: 1920px;
+  }
+
+
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+
+    .card-container > *:not(.circle-link) ,
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <span></span>
+    <div class="spacer"></div>
+    <div class="card highlight-card card-small">
+
+      <img src="https://dfw.realestateiq.me/v4/images/realters.png" alt="alternatetext">
+  
+    </div>
+</div>
+
+<div class="content" role="main">
+
+  <!-- Highlight Card -->
+
+
+  <!-- Resources -->
+  <h2>{{title}}</h2>
+  <p>Here are some links to help you get started:</p>
+
+  <div class="card-container">
+    
+    <a class="card" target="_blank" rel="noopener">
+      
+      <span><b>Quick Search</b></span>
+
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+    <a class="card" target="_blank" rel="noopener" >
+      
+      <span><b>Search</b></span>
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </a>
+
+    <a class="card" target="_blank" rel="noopener" >
+      <span><b>My Searches</b></span>
+
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </a>
+  </div>
+  <div style="width:96%;" class="jumbotron">
+    <div class="container text-left">
+      <h5>Deal type</h5>
+    </div>
+    
+    <div class="form-group">
+    <input style="width:40px;" type="radio" name="deal_type" id="discountRadio" checked="checked" value="Discount">
+    <label class="radio-form radio-spacing">20%+ discount
+    <span class="checkmark-radio"></span>
+    </label>
+    
+    <input style="width:40px;" type="radio" name="deal_type" id="rentalindexRadio" value="Rentalindex">
+    <label class="radio-form radio-spacing">0.8%+ rental index
+    <span class="checkmark-radio"></span>
+    </label>
+    </div>
+  
+    <div class="container text-left">
+      <h5>Geography</h5>
+    </div>
+      <div class="form-group">
+      <input style="width:40px;" type="radio" name="geographySelect" id="countyRadio" checked="checked" value="county">
+      <label class="radio-form radio-spacing-city">County
+      <span class="checkmark-radio"></span>
+      </label>
+  
+      <input style="width:40px;" type="radio" name="geographySelect" id="cityRadio" value="city">
+      <label class="radio-form radio-spacing">City
+      <span class="checkmark-radio"></span>
+      </label>
+      </div>
+       
+      <div class="form-group">
+        <select class="form-control select-text geography" name="county" id="geographycounty">
+        <option value="">Select County</option>
+        <option value="0">Collin</option>
+        <option value="1">Cooke</option>
+        <option value="2">Dallas</option>
+        <option value="3">Denton</option>
+        <option value="4">Grayson</option>
+        <option value="5">Hunt</option>
+        </select>
+        <select class="form-control select-text geography" name="city" id="geographycity" style='display:none'>
+        <option value="">Select City</option>
+        <option value="0">Addison</option>
+        <option value="1">Allen</option>
+        <option value="2">Anna</option>
+        <option value="3">Apartment</option>
+        <option value="4">Argyle</option>
+        <option value="5">Aubrey</option>
+        <option value="6">Balch Springs</option>
+        <option value="7">Bartonville</option>
+        <option value="8">Bells </option>
+        <option value="9">Blue Ridge</option>
+        <option value="10">Bolivar</option>
+        <option value="11">Caddo Mills</option>
+        <option value="12">Callisburg</option>
+        <option value="13">Campbell</option>
+        <option value="14">Carriagehouse</option>
+        <option value="15">Carrollton</option>
+        <option value="16">Cash</option>
+        <option value="17">Cedar Hill</option>
+        <option value="18">Celeste</option>
+        <option value="19">Celina</option>
+        <option value="20">Clark</option>
+        <option value="21">Cockrell Hill </option>
+        <option value="22">Cokrell Hill</option>
+        <option value="23">Collinsville</option>
+        <option value="24">Commerce</option>
+        <option value="25">Copeville</option>
+        <option value="26">Coppell</option>
+        <option value="27">Copper Canyon</option>
+        <option value="28">Corinth</option>
+        <option value="29">Corral City</option>
+        <option value="30">Cross Roads</option>
+        <option value="31">Cumby</option>
+        <option value="32">Dallas</option>
+        <option value="33">De Soto</option>
+        <option value="34">Denison </option>
+        <option value="35">Denton</option>
+        <option value="36">Desoto</option>
+        <option value="37">Dish</option>
+        <option value="38">Dorchester</option>
+        <option value="39">Double Oak</option>
+        <option value="40">Duncanville</option>
+        <option value="41">Era</option>
+        <option value="42">Fairview</option>
+        <option value="43">Farmers Branch</option>
+        <option value="44">Farmersville</option>
+        <option value="45">Ferris </option>
+        <option value="46">Flower Mound</option>
+        <option value="47">Forestburg</option>
+        <option value="48">Frisco</option>
+        <option value="49">Gainesville </option>
+        <option value="50">Garland</option>
+        <option value="51">Glenn Heights</option>
+        <option value="52">Gordonville</option>
+        <option value="53">Grand Prairie</option>
+        <option value="54">Greenville </option>
+        <option value="55">Gunter</option>
+        <option value="56">Hackberry</option>
+        <option value="57">Hawk Cove </option>
+        <option value="58">Hebron</option>
+        <option value="59">Hi Rise</option>
+        <option value="60">Hickory Creek</option>
+        <option value="61">Highland Park</option>
+        <option value="62">Highland Village</option>
+        <option value="63">Howe</option>
+        <option value="64">Hutchins</option>
+        <option value="65">Irving</option>
+        <option value="66">Josephine</option>
+        <option value="67">Justin</option>
+        <option value="68">Kingston</option>
+        <option value="69">Knollwood</option>
+        <option value="70">Krugerville</option>
+        <option value="71">Krum</option>
+        <option value="72">Ladonia</option>
+        <option value="73">Lake Dallas</option>
+        <option value="74">Lake Kiowa</option>
+        <option value="75">Lakewood Village</option>
+        <option value="76">Lancaster</option>
+        <option value="77">Lantana</option>
+        <option value="78">Lavon</option>
+        <option value="79">Leonard</option>
+        <option value="80">Lewisville</option>
+        <option value="81">Lincoln Park</option>
+        <option value="82">Lindsay </option>
+        <option value="83">Little Elm</option>
+        <option value="84">Lone Oak </option>
+        <option value="85">Lowry Crossing</option>
+        <option value="86">Lucas</option>
+        <option value="87">Luella</option>
+        <option value="88">McKinney</option>
+        <option value="89">Melissa</option>
+        <option value="90">Merit</option>
+        <option value="91">Mesquite</option>
+        <option value="92">Muenster</option>
+        <option value="93">Murphy</option>
+        <option value="94">Myra</option>
+        <option value="95">Nevada</option>
+        <option value="96">New Hope</option>
+        <option value="97">Neylandville</option>
+        <option value="98">Northlake</option>
+        <option value="99">Oak Point</option>
+        <option value="100">Oak Ridge</option>
+        <option value="101">Ovilla </option>
+        <option value="102">Parker</option>
+        <option value="103">Pecan Gap</option>
+        <option value="104">Pilo Point</option>
+        <option value="105">Pilot Point</option>
+        <option value="106">Plano</option>
+        <option value="107">Poetry</option>
+        <option value="108">Ponder</option>
+        <option value="109">Pottsboro</option>
+        <option value="110">Princeton</option>
+        <option value="111">Prosper</option>
+        <option value="112">Providence Village</option>
+        <option value="113">Quinlan</option>
+        <option value="114">Red Oak</option>
+        <option value="115">Richardson</option>
+        <option value="116">Roanoke</option>
+        <option value="117">Rockwall</option>
+        <option value="118">Rosston</option>
+        <option value="119">Rowlett</option>
+        <option value="120">Royse City</option>
+        <option value="121">Sachse</option>
+        <option value="122">Sadler</option>
+        <option value="123">Saint Jo</option>
+        <option value="124">Saint Paul</option>
+        <option value="125">San Jose</option>
+        <option value="126">Sanger</option>
+        <option value="127">Savannah</option>
+        <option value="128">Savoy</option>
+        <option value="129">Seagoville</option>
+        <option value="130">Shady Shores</option>
+        <option value="131">Sherman </option>
+        <option value="132">Southmayd</option>
+        <option value="133">St Paul</option>
+        <option value="134">Sunnyvale</option>
+        <option value="135">The Colony</option>
+        <option value="136">Tioga</option>
+        <option value="137">Tom Bean</option>
+        <option value="138">Trenton</option>
+        <option value="139">Trophy Club</option>
+        <option value="140">Union Valley </option>
+        <option value="141">University Park</option>
+        <option value="142">Valley View</option>
+        <option value="143">Van Alstyne </option>
+        <option value="144">Wagner</option>
+        <option value="145">West Tawakoni </option>
+        <option value="146">Westminster </option>
+        <option value="147">Weston</option>
+        <option value="148">Whitesboro </option>
+        <option value="149">Whitewright</option>
+        <option value="150">Wills Point</option>
+        <option value="151">Wilmer</option>
+        <option value="152">Wolfe City</option>
+        <option value="153">Wylie</option>
+        </select>
+        </div>
+
+        <div class="geographynew" name="zipcodeselect" id="geographynewzipcode" style='display:none'>
+          <select class="selectpicker" title="Select zipcode" multiple data-size="5" data-selected-text-format="count > 5" data-actions-box="true" data-live-search="true" data-focus-off="true" data-width="100%" data-header="Select zipcode" name="zip[]" id="zip">
+          <option value="0">75001</option>
+          <option value="1">75002</option>
+          <option value="2">75006</option>
+          <option value="3">75007</option>
+          <option value="4">75009</option>
+          <option value="5">75010</option>
+          <option value="6">75011</option>
+          <option value="7">75013</option>
+          <option value="8">75014</option>
+          <option value="9">75015</option>
+          <option value="10">75016</option>
+          <option value="11">75017</option>
+          <option value="12">75019</option>
+          <option value="13">75020</option>
+          <option value="14">75021</option>
+          <option value="15">75022</option>
+          <option value="16">75023</option>
+          <option value="17">75024</option>
+          <option value="18">75025</option>
+          <option value="19">75026</option>
+          <option value="20">75027</option>
+          <option value="21">75028</option>
+          <option value="22">75029</option>
+          <option value="23">75030</option>
+          <option value="24">75034</option>
+          <option value="25">75035</option>
+          <option value="26">75037</option>
+          <option value="27">75038</option>
+          <option value="28">75039</option>
+          <option value="29">75040</option>
+          <option value="30">75041</option>
+          <option value="31">75042</option>
+          <option value="32">75043</option>
+          <option value="33">75044</option>
+          <option value="34">75045</option>
+          <option value="35">75046</option>
+          <option value="36">75047</option>
+          <option value="37">75048</option>
+          <option value="38">75049</option>
+          <option value="39">75050</option>
+          <option value="40">75051</option>
+          <option value="41">75052</option>
+          <option value="42">75053</option>
+          <option value="43">75054</option>
+          <option value="44">75056</option>
+          <option value="45">75057</option>
+          <option value="46">75060</option>
+          <option value="47">75061</option>
+          <option value="48">75062</option>
+          <option value="49">75063</option>
+          <option value="50">75065</option>
+          <option value="51">75067</option>
+          <option value="52">75068</option>
+          <option value="53">75069</option>
+          <option value="54">75070</option>
+          <option value="55">75071</option>
+          <option value="56">75074</option>
+          <option value="57">75075</option>
+          <option value="58">75077</option>
+          <option value="59">75078</option>
+          <option value="60">75080</option>
+          <option value="61">75081</option>
+          <option value="62">75082</option>
+          <option value="63">75083</option>
+          <option value="64">75085</option>
+          <option value="65">75086</option>
+          <option value="66">75088</option>
+          <option value="67">75089</option>
+          <option value="68">75093</option>
+          <option value="69">75094</option>
+          <option value="70">75097</option>
+          <option value="71">75098</option>
+          <option value="72">75099</option>
+          <option value="73">75104</option>
+          <option value="74">75105</option>
+          <option value="75">75106</option>
+          <option value="76">75114</option>
+          <option value="77">75115</option>
+          <option value="78">75116</option>
+          <option value="79">75118</option>
+          <option value="80">75121</option>
+          <option value="81">75123</option>
+          <option value="82">75126</option>
+          <option value="83">75134</option>
+          <option value="84">75135</option>
+          <option value="85">75137</option>
+          <option value="86">75138</option>
+          <option value="87">75141</option>
+          <option value="88">75142</option>
+          <option value="89">75143</option>
+          <option value="90">75146</option>
+          <option value="91">75147</option>
+          <option value="92">75149</option>
+          <option value="93">75150</option>
+          <option value="94">75157</option>
+          <option value="95">75158</option>
+          <option value="96">75159</option>
+          <option value="97">75160</option>
+          <option value="98">75161</option>
+          <option value="99">75164</option>
+          <option value="100">75166</option>
+          <option value="101">75172</option>
+          <option value="102">75173</option>
+          <option value="103">75180</option>
+          <option value="104">75181</option>
+          <option value="105">75182</option>
+          <option value="106">75185</option>
+          <option value="107">75187</option>
+          <option value="108">75201</option>
+          <option value="109">75202</option>
+          <option value="110">75203</option>
+          <option value="111">75204</option>
+          <option value="112">75205</option>
+          <option value="113">75206</option>
+          <option value="114">75207</option>
+          <option value="115">75208</option>
+          <option value="116">75209</option>
+          <option value="117">75210</option>
+          <option value="118">75211</option>
+          <option value="119">75212</option>
+          <option value="120">75214</option>
+          <option value="121">75215</option>
+          <option value="122">75216</option>
+          <option value="123">75217</option>
+          <option value="124">75218</option>
+          <option value="125">75219</option>
+          <option value="126">75220</option>
+          <option value="127">75221</option>
+          <option value="128">75222</option>
+          <option value="129">75223</option>
+          <option value="130">75224</option>
+          <option value="131">75225</option>
+          <option value="132">75226</option>
+          <option value="133">75227</option>
+          <option value="134">75228</option>
+          <option value="135">75229</option>
+          <option value="136">75230</option>
+          <option value="137">75231</option>
+          <option value="138">75232</option>
+          <option value="139">75233</option>
+          <option value="140">75234</option>
+          <option value="141">75235</option>
+          <option value="142">75236</option>
+          <option value="143">75237</option>
+          <option value="144">75238</option>
+          <option value="145">75240</option>
+          <option value="146">75241</option>
+          <option value="147">75242</option>
+          <option value="148">75243</option>
+          <option value="149">75244</option>
+          <option value="150">75245</option>
+          <option value="151">75246</option>
+          <option value="152">75247</option>
+          <option value="153">75248</option>
+          <option value="154">75249</option>
+          <option value="155">75250</option>
+          <option value="156">75251</option>
+          <option value="157">75252</option>
+          <option value="158">75253</option>
+          <option value="159">75254</option>
+          <option value="160">75258</option>
+          <option value="161">75260</option>
+          <option value="162">75261</option>
+          <option value="163">75262</option>
+          <option value="164">75263</option>
+          <option value="165">75264</option>
+          <option value="166">75265</option>
+          <option value="167">75266</option>
+          <option value="168">75267</option>
+          <option value="169">75270</option>
+          <option value="170">75275</option>
+          <option value="171">75277</option>
+          <option value="172">75283</option>
+          <option value="173">75284</option>
+          <option value="174">75285</option>
+          <option value="175">75286</option>
+          <option value="176">75287</option>
+          <option value="177">75301</option>
+          <option value="178">75303</option>
+          <option value="179">75310</option>
+          <option value="180">75312</option>
+          <option value="181">75313</option>
+          <option value="182">75315</option>
+          <option value="183">75320</option>
+          <option value="184">75323</option>
+          <option value="185">75326</option>
+          <option value="186">75334</option>
+          <option value="187">75336</option>
+          <option value="188">75339</option>
+          <option value="189">75340</option>
+          <option value="190">75342</option>
+          <option value="191">75343</option>
+          <option value="192">75344</option>
+          <option value="193">75353</option>
+          <option value="194">75354</option>
+          <option value="195">75355</option>
+          <option value="196">75356</option>
+          <option value="197">75357</option>
+          <option value="198">75358</option>
+          <option value="199">75359</option>
+          <option value="200">75360</option>
+          <option value="201">75363</option>
+          <option value="202">75364</option>
+          <option value="203">75367</option>
+          <option value="204">75368</option>
+          <option value="205">75370</option>
+          <option value="206">75371</option>
+          <option value="207">75372</option>
+          <option value="208">75373</option>
+          <option value="209">75374</option>
+          <option value="210">75376</option>
+          <option value="211">75378</option>
+          <option value="212">75379</option>
+          <option value="213">75380</option>
+          <option value="214">75381</option>
+          <option value="215">75382</option>
+          <option value="216">75386</option>
+          <option value="217">75387</option>
+          <option value="218">75388</option>
+          <option value="219">75389</option>
+          <option value="220">75390</option>
+          <option value="221">75391</option>
+          <option value="222">75392</option>
+          <option value="223">75393</option>
+          <option value="224">75394</option>
+          <option value="225">75395</option>
+          <option value="226">75396</option>
+          <option value="227">75397</option>
+          <option value="228">75398</option>
+          <option value="229">75401</option>
+          <option value="230">75402</option>
+          <option value="231">75403</option>
+          <option value="232">75404</option>
+          <option value="233">75407</option>
+          <option value="234">75409</option>
+          <option value="235">75422</option>
+          <option value="236">75423</option>
+          <option value="237">75424</option>
+          <option value="238">75428</option>
+          <option value="239">75429</option>
+          <option value="246">75952</option>
+          <option value="247">76001</option>
+          <option value="248">76002</option>
+          <option value="249">76003</option>
+          <option value="250">76004</option>
+          <option value="251">76005</option>
+          <option value="252">76006</option>
+          <option value="253">76007</option>
+          <option value="254">76008</option>
+          <option value="255">76010</option>
+          <option value="256">76011</option>
+          <option value="257">76012</option>
+          <option value="258">76013</option>
+          <option value="259">76014</option>
+          <option value="260">76015</option>
+          <option value="261">76016</option>
+          <option value="262">76017</option>
+          <option value="263">76018</option>
+          <option value="264">76019</option>
+          <option value="265">76020</option>
+          <option value="266">76021</option>
+          <option value="267">76022</option>
+          <option value="268">76023</option>
+          <option value="269">76036</option>
+          <option value="270">76039</option>
+          <option value="271">76040</option>
+          <option value="272">76052</option>
+          <option value="273">76054</option>
+          <option value="274">76063</option>
+          <option value="275">76066</option>
+          <option value="276">76201</option>
+          <option value="277">76202</option>
+          <option value="278">76203</option>
+          <option value="279">76204</option>
+          <option value="280">76205</option>
+          <option value="281">76206</option>
+          <option value="282">76207</option>
+          <option value="283">76208</option>
+          <option value="284">76209</option>
+          <option value="285">76210</option>
+          <option value="286">76226</option>
+          <option value="287">76227</option>
+          <option value="288">76238</option>
+          <option value="289">76240</option>
+          <option value="290">76241</option>
+          <option value="291">76247</option>
+          <option value="292">76249</option>
+          <option value="293">76250</option>
+          <option value="294">76252</option>
+          <option value="295">76253</option>
+          <option value="296">76258</option>
+          <option value="297">76259</option>
+          <option value="298">76262</option>
+          <option value="299">76263</option>
+          <option value="300">76266</option>
+          <option value="301">76272</option>
+          <option value="302">76299</option>
+          </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label" for="lastupdated"><h5>Last Updated</h5></label>
+            <input type="text" id="daterange" name="daterange" class="form-control" value="" placeholder="Select timeframe" autocomplete="off" />
+            <span></span>
+          </div>
+            <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
+            <button class="form-control btn search-button" style="float: right; margin-bottom: 36px;" onclick="searchQuick(event)">
+            <span id="runsearchQuick">SEARCH</span>
+            <span id="runsearchQuickspin" class="fa fa-refresh fa-spin" style="display: none;"></span>
+            </button>
+            </div>
+      </div>
+      
+
+</div>
+
+
+
+
+ 
+
+
+  
+  
+  
+  
+  
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
